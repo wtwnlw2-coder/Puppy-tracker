@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neonate Yorkie Puppy Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #6a4f8a;
+        }
+        .alert {
+            display: none;
+            padding: 10px;
+            background-color: #ffcc00;
+            color: #333;
+            margin-bottom: 15px;
+            transition: opacity 1s ease;
+        }
+        .table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Neonate Yorkie Puppy Tracker</h1>
+<div id="alert" class="alert">Puppy Alert! Check the details!</div>
+
+<form id="tracker-form">
+    <input type="text" id="intake" placeholder="Intake (ml)" required>
+    <input type="text" id="elimination" placeholder="Elimination (ml)" required>
+    <input type="text" id="food" placeholder="Food (grams)" required>
+    <input type="text" id="health" placeholder="Health Status" required>
+    <button type="submit">Track</button>
+</form>
+
+<table class="table" id="tracker-table">
+    <tr>
+        <th>Date</th>
+        <th>Intake</th>
+        <th>Elimination</th>
+        <th>Food</th>
+        <th>Health Status</th>
+    </tr>
+</table>
+
+<button id="export">Export Data</button>
+
+<script>
+    document.getElementById('tracker-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const intake = document.getElementById('intake').value;
+        const elimination = document.getElementById('elimination').value;
+        const food = document.getElementById('food').value;
+        const health = document.getElementById('health').value;
+        const date = new Date().toISOString().split('T')[0];
+
+        const entry = { date, intake, elimination, food, health };
+        let entries = JSON.parse(localStorage.getItem('puppyTracker')) || [];
+        entries.push(entry);
+        localStorage.setItem('puppyTracker', JSON.stringify(entries));
+
+        displayEntries();
+        showAlert();
+        this.reset();
+    });
+
+    function displayEntries() {
+        const entries = JSON.parse(localStorage.getItem('puppyTracker')) || [];
+        const table = document.getElementById('tracker-table');
+        table.innerHTML = `
+            <tr>
+                <th>Date</th>
+                <th>Intake</th>
+                <th>Elimination</th>
+                <th>Food</th>
+                <th>Health Status</th>
+            </tr>`;
+        entries.forEach(entry => {
+            const row = table.insertRow();
+            row.insertCell(0).innerText = entry.date;
+            row.insertCell(1).innerText = entry.intake;
+            row.insertCell(2).innerText = entry.elimination;
+            row.insertCell(3).innerText = entry.food;
+            row.insertCell(4).innerText = entry.health;
+        });
+    }
+
+    function showAlert() {
+        const alert = document.getElementById('alert');
+        alert.style.display = 'block';
+        setTimeout(() => {
+            alert.style.opacity = '0';
+        }, 3000);
+    }
+
+    document.getElementById('export').addEventListener('click', function() {
+        const data = localStorage.getItem('puppyTracker');
+        const blob = new Blob([data], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'puppy_tracker_data.json';
+        a.click();
+        URL.revokeObjectURL(url);
+    });
+
+    window.onload = displayEntries;
+</script>
+</body>
+</html>
