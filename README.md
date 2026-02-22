@@ -1,31 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neonate Yorkie Puppy Tracker v2</title>
-    <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background: #f0f8ff; }
-        h1 { color: #8b4513; text-align: center; }
-        .puppy-section { border: 1px solid #ddd; margin: 20px 0; padding: 15px; border-radius: 8px; background: white; }
-        input, select, textarea { width: 100%; padding: 8px; margin: 5px 0; box-sizing: border-box; }
-        button { background: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; margin: 5px 0; }
-        button:hover { background: #45a049; }
-        .export { background: #2196F3; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        .alert { color: red; font-weight: bold; }
-        .warning { background: #fff3cd; padding: 10px; border-radius: 4px; margin: 10px 0; }
-        .growth-chart { background: #e6f3ff; padding: 10px; margin: 10px 0; font-size: 0.9em; }
-        canvas { max-width: 100%; height: 200px; }
-    </style>
-</head>
-<body>
-    <h1>Neonate Yorkie Puppy Tracker v2</h1>
-    <p>Enhanced for your orphaned Yorkie neonates: Logs, diagnostics (fading alerts), trends, export. Log post every-2hr feed.[web:15][cite:9]</p>
-    <section id="puppies"></section>
+# Puppy Tracker
 
-    <script>
-        let puppies = JSON.parse(localStorage.getItem('puppies')) || [
-            { id: 1,
+## Overview
+Puppy Tracker is an application designed to help users manage their puppy's information and track their growth over time. This application allows users to input details about their puppies including name, breed, age, and medical history.
+
+## Features
+- Manage multiple puppies
+- Track health records
+- Reminders for vaccinations
+- Growth tracking
+
+## Setup Instructions
+To set up the Puppy Tracker application, follow these steps:
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/wtwnlw2-coder/Puppy-tracker.git
+   cd Puppy-tracker
+   ```
+2. **Install dependencies**:
+   Ensure that you have [Node.js](https://nodejs.org/) installed, then run:
+   ```bash
+   npm install
+   ```
+3. **Run the application**:
+   To start the application, run:
+   ```bash
+   npm start
+   ```
+4. **Access the application**:
+   Open your browser and navigate to `http://localhost:3000` to begin using the Puppy Tracker application.
+
+## Contributing
+If you'd like to contribute to the Puppy Tracker project, feel free to fork the repository and submit a pull request with your changes.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
